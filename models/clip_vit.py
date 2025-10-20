@@ -42,7 +42,7 @@ class CLIPVIT(nn.Module):
             self.num_layers = len(self.transformer.resblocks)  # 12
             self.dtype = clip_model.dtype
             self.text_encoder = TextEncoder_cat(args, clip_model)
-            self.prompt_learner = MultiModalPromptLearner(args, clip_model)
+            self.prompt_learner = CATPromptLearner(args, clip_model)
             self.depth = args.prompts_depth
 
     # ========================= Stage1 =========================
