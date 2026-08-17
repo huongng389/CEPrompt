@@ -71,6 +71,8 @@ def train(model, clip_model, args, optimizer, criterion, dataloader, logger, lab
     print("FINETUNING Epoch: {}/{} \tLoss: {:.4f} \tRankLoss: {:.4f} \tDistLoss: {:.4f} \tLearningRate {:.6f} \tTrain Acc: {:.4f} ".format(epoch, args.epochs, tl, mean_rank_loss, mean_dist_loss, learning_rate, ta))
 
     torch.save(model.state_dict(), os.path.join(args.record_path, "model_epoch_{}.pth".format(epoch)))
+    torch.save({"model": model.state_dict(), "optimizer": optimizer.state_dict(), "epoch": epoch},
+               os.path.join(args.record_path, "resume_checkpoint.pth"))
     return ta, tl
 
 

@@ -53,6 +53,15 @@ def main(args):
     # Build Optimizer
     optimizer = build_optimizer(args, model)
 
+    start_epoch = 0
+    if args.resume:
+        print("Resuming from {}".format(args.resume))
+        ckpt = torch.load(args.resume, map_location=args.device)
+        model.load_state_dict(ckpt["model"])
+        optimizer.load_state_dict(ckpt["optimizer"])
+        start_epoch = ckpt["epoch"] + 1
+        print("Resuming at epoch {}".format(start_epoch))
+
     if args.loss_function == 'ce':
         criterion = nn.CrossEntropyLoss()
     elif args.loss_function == 'focal':
@@ -70,7 +79,7 @@ def main(args):
     val_loss_list = []
 
     # Training Loop
-    for epoch in range(args.epochs):
+    for epoch in range(start_epoch, args.epochs):
         model.train()
         train_acc, train_loss = train(model, clip_model, args, optimizer, criterion, train_dataloader, logger, label_token, epoch)  # raw
         model.eval()
@@ -88,6 +97,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--seed",                   type=int,   default=42  )
     parser.add_argument("--record_path",            type=str,   default='/home/CEPrompt/record')
+    parser.add_argument("--resume",                 type=str,   default=None,   help="path to resume_checkpoint.pth to continue training")
 
     parser.add_argument('--classes', type=int, default=7)
     parser.add_argument('--dataset', type=str, default='rafdb', choices=['rafdb', 'affectnet', 'affectnet_8'])
