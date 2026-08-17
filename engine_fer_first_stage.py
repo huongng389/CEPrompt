@@ -106,7 +106,7 @@ def test(model, args, criterion, dataloader, logger, label_token, epoch=-1):
             labels_np = np.array(labels)
             predRST.append(preds_np)
             labelRET.append(labels_np)
-            转换成一维数组
+            # 转换成一维数组
         predRST = np.concatenate(predRST, axis=0)
         labelRET = np.concatenate(labelRET, axis=0)
         # 保存成mat文件, predRST为a列, labelRET为b列
