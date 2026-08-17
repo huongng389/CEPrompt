@@ -124,12 +124,11 @@ if __name__ == "__main__":
 
     parser.add_argument('--classes',                type=int,   default=7       )
     parser.add_argument('--dataset', type=str,      default='rafdb', choices=['rafdb', 'affectnet', 'affectnet_8'])
-    parser.add_argument('--data-path', type=str, default='/data/RAFDB/basic', choices=['/data/RAFDB/basic/', '/data/AffectNet/'])
-    
+    parser.add_argument('--data-path', type=str, default='/data/RAFDB/basic')
+
     parser.add_argument("--ckpt-path",              type=str,   default='/data/RAFDB/ckpt/model_epoch_34_acc9221.pth'    )
-    
-    parser.add_argument("--clip-path", type=str, default='/data/CEPrompt_ckpt/pre-trained_model/ViT-B-16.pt',
-                        choices=['/data/CEPrompt_ckpt/pre-trained_model/ViT-B-16.pt', '/data/CEPrompt_ckpt/pre-trained_model/ViT-B-32.pt', '/data/CEPrompt_ckpt/pre-trained_model/ViT-L-14.pt'])
+
+    parser.add_argument("--clip-path", type=str, default='/data/CEPrompt_ckpt/pre-trained_model/ViT-B-16.pt')
 
     parser.add_argument("--eval-ckpt",              type=str,   default=None    )
     parser.add_argument("--batch-size",             type=int,   default=128,    )
