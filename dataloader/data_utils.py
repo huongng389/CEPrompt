@@ -64,6 +64,8 @@ def get_labelname(args):
         label_nms = ['surprise', 'fear', 'disgusted', 'happy', 'sad', 'anger', 'neutral']
     if args.dataset == 'affectnet':
         label_nms = ['neutral', 'happy', 'sad', 'surprise', 'fear', 'disgusted', 'anger']
+    if args.dataset == 'affectnet_8':
+        label_nms = ['neutral', 'happy', 'sad', 'surprise', 'fear', 'disgusted', 'anger', 'contempt']
     print(args.dataset, 'dataset, label_nms: ', label_nms)
     args.label_nms = label_nms
     return args
